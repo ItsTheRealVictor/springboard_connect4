@@ -16,7 +16,7 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard(len) {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // I got this code from the answer to a stackoverflow question about creating an (n x m) matrix in javascript
 
     let arr = new Array(len || 0), i = len
 
@@ -34,11 +34,12 @@ function makeHtmlBoard() {
 
     const htmlBoard = document.querySelector('#board')
 
-  // TODO: add comment for this code
+  // creates the table columns
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
+  // for every row, this loops through and adds a cell, then appends another cell to that cell. 
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -46,7 +47,7 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
+  // creates ${HEIGHT} number of rows and ${WIDTH} number of columns using next for loops
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
