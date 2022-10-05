@@ -15,11 +15,19 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard() {
+function makeBoard(len) {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+
+    let arr = new Array(len || 0), i = len
+
+    if (arguments.length > 1){
+      let args = Array.prototype.slice.call(arguments, 1)
+      while(i--) arr[(len-1) - i] = makeBoard.apply(this, args)
+    }
+    return arr
 }
 
-/** makeHtmlBoard: make HTML table and row of column tops. */
+/** makeHtmlBoard: make HTML table and row of column tops. */ 
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
