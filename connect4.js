@@ -32,6 +32,8 @@ function makeBoard(len) {
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
 
+    const htmlBoard = document.querySelector('#board')
+
   // TODO: add comment for this code
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
