@@ -32,14 +32,14 @@ function makeBoard(len) {
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
 
-    const htmlBoard = document.querySelector('#board')
+  const htmlBoard = document.querySelector('#board')
 
   // creates the table columns
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // for every row, this loops through and adds a cell, then appends another cell to that cell. 
+  //  creates the cells necessary for the number of columns chosen (the width)
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -47,7 +47,7 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
-  // creates ${HEIGHT} number of rows and ${WIDTH} number of columns using next for loops
+  // creates ${HEIGHT} number of rows and ${WIDTH} number of columns using nested for loops
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
@@ -70,7 +70,21 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+
+  const topRowPieces = document.querySelectorAll('#column-top td')
+  let addedDiv = document.createElement('div')
+  for (piece of topRowPieces){
+    addedDiv.classList.add('piece')
+    addedDiv.classList.add(`p${currPlayer}`)
+    piece.appendChild(addedDiv)
+  
+  }
+  const choice = document.getElementById(`${y}-${x}`)
+  choice.append(addedDiv)
+
+    
 }
+
 
 /** endGame: announce game end */
 
@@ -91,12 +105,13 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
+  // TODO: add line to update in-memory board\
+  board[y][x] = currPlayer % 2
   placeInTable(y, x);
 
   // check for win
   if (checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
+    return endGame(`Player ${currPlayer % 2} won!`);
   }
 
   // check for tie
@@ -104,6 +119,8 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  currPlayer++
+  currPlayer = currPlayer % 2 === 0 ? 2:1
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -120,7 +137,7 @@ function checkForWin() {
         y < HEIGHT &&
         x >= 0 &&
         x < WIDTH &&
-        board[y][x] === currPlayer
+        board[y][x] === currPlayer % 2
     );
   }
 
@@ -140,5 +157,5 @@ function checkForWin() {
   }
 }
 
-makeBoard();
+board = makeBoard(WIDTH, HEIGHT);
 makeHtmlBoard();
