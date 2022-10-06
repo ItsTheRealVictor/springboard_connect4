@@ -62,15 +62,30 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  // I had to look at the solution for this function. I had no idea where to start
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (!board[y][x]) {
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+// this is the solution code
+const piece = document.createElement('div');
+piece.classList.add('piece');
+piece.classList.add(`p${currPlayer}`);
+piece.style.top = -50 * (y + 2);
 
+const spot = document.getElementById(`${y}-${x}`);
+spot.append(piece);
+}
+  // this was my attempt
+  /*
   const topRowPieces = document.querySelectorAll('#column-top td')
   let addedDiv = document.createElement('div')
   for (piece of topRowPieces){
@@ -84,6 +99,9 @@ function placeInTable(y, x) {
 
     
 }
+*/
+
+
 
 
 /** endGame: announce game end */
@@ -96,10 +114,10 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -157,5 +175,5 @@ function checkForWin() {
   }
 }
 
-board = makeBoard(WIDTH, HEIGHT);
+makeBoard();
 makeHtmlBoard();
