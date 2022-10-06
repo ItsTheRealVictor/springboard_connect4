@@ -115,7 +115,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(`Looks like player ${currPlayer} wins`)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -146,7 +146,10 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  // Had to look at the solution for this one too, had no idea
+  if (board.every(row => row.every(cell => cell))) {
+    return endGame('Tie!');
+  }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
