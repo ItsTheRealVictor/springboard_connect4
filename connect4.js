@@ -5,17 +5,17 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+let WIDTH = 7;
+let HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
+let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard(len) {
+function makeBoard(wth,hgt) {
   // I got this code from the answer to a stackoverflow question about creating an (n x m) matrix in javascript
   // still not working, I'll try the solution code
 
@@ -30,8 +30,8 @@ function makeBoard(len) {
 // }
 
 // 33 to 36 is solution code, comment in/out to try it
-for (let y = 0; y < HEIGHT; y++) {
-  board.push(Array.from({ length: WIDTH }));
+for (let y = 0; y < hgt; y++) {
+  board.push(Array.from({ length: wth }));
 }
 }
 
@@ -102,6 +102,8 @@ function placeInTable(y, x) {
     piece.appendChild(addedDiv)
   
   }
+
+  // i tried using document.querySelector(`#${y}-{x}`) but it won't work unless it is getElementById. Why?
   const choice = document.getElementById(`${y}-${x}`)
   choice.append(addedDiv)
 
@@ -115,7 +117,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  alert(`Looks like player ${currPlayer} wins`)
+  alert(`Nice! Player ${currPlayer} wins`)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -191,5 +193,5 @@ function checkForWin() {
   }
 }
 
-makeBoard();
+makeBoard(WIDTH,HEIGHT);
 makeHtmlBoard();
